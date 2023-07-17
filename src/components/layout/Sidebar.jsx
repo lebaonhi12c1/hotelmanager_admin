@@ -30,7 +30,7 @@ const Sidebar = memo(() => {
                             ${ router.pathname === '/' && 'bg-blue-500'}
                         ` }
                     >
-                        Home
+                        Trang chủ
                     </div>
                 </Link>
                 <Link
@@ -44,7 +44,7 @@ const Sidebar = memo(() => {
                             `
                         }
                     >
-                        Room
+                        Phòng
                     </div>
                 </Link>
                 <Link
@@ -58,7 +58,7 @@ const Sidebar = memo(() => {
                             `
                         }
                     >
-                        Room Type
+                        Loại phòng
                     </div>
                 </Link>
                 <Link
@@ -72,7 +72,7 @@ const Sidebar = memo(() => {
                             `
                         }
                     >
-                        Booking
+                        Đặt phòng
                     </div>
                 </Link>
             </div>

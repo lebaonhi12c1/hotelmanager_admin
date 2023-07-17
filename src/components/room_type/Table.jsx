@@ -33,7 +33,7 @@ const Table = memo(( { value } ) => {
                 return (
                     <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
                         {
-                            value
+                            "Công khai"
                         }
                     </span>
                 )
@@ -42,7 +42,7 @@ const Table = memo(( { value } ) => {
                     <span className="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
 
                         {
-                            value
+                            "Nháp"
                         }
                     </span>
 
@@ -125,7 +125,7 @@ const Table = memo(( { value } ) => {
                                             </td>
                                             <td className="px-6 py-4">
                                                 {
-                                                    item?.description
+                                                    item?.capacity
                                                 }
                                             </td>
                                             <td
@@ -147,7 +147,7 @@ const Table = memo(( { value } ) => {
                                                 }
                                             >
                                                <div 
-                                                    className='px-6 py-4'
+                                                    className='px-6 py-4 whitespace-nowrap'
                                                >
                                                     {
                                                         get_style_status( item?.status )
@@ -155,10 +155,10 @@ const Table = memo(( { value } ) => {
                                                </div>
                                             </td>
                                             <td 
-                                                 className="px-6 py-4"
+                                                 className="px-6 py-4 whitespace-nowrap"
                                             >
                                                 {
-                                                    item?.employee
+                                                    item?.Employee?.name
                                                 }
                                             </td>
                                             <td className="px-6 py-4">
