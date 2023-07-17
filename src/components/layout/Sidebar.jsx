@@ -1,9 +1,17 @@
 import React, { memo } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar = memo(() => {
+    const router = useLocation()
+
+    const get_active = value =>
+    {
+        return router.pathname.includes( value )
+    }
+
     return (
         <div
-            className='flex flex-col bg-blue-900 text-white'
+            className='flex flex-col bg-blue-900 text-white h-full'
         >
             <div
                 className='p-4 border-b-2'
@@ -11,13 +19,34 @@ const Sidebar = memo(() => {
                 logo
             </div>
             <div
-                className='flex flex-col gap-4'
+                className='flex flex-col'
             >
-                <div
-                    className='p-4 hover:bg-blue-500 hover:text-white cursor-pointer'
+                <Link
+                    to={ '/' }
                 >
-                    Home
-                </div>
+                    <div
+                        className= { `
+                            py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                            ${ router.pathname === '/' && 'bg-blue-500'}
+                        ` }
+                    >
+                        Home
+                    </div>
+                </Link>
+                <Link
+                    to={ '/rooms' }
+                >
+                    <div
+                        className={
+                            `
+                                py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                                ${ get_active( 'room' ) && 'bg-blue-500' }
+                            `
+                        }
+                    >
+                        Room
+                    </div>
+                </Link>
             </div>
         </div>
     );

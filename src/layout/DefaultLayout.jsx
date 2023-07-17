@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import Sidebar from '../components/layout/Sidebar';
-
+import Navbar from './Navbar';
 const DefaultLayout = memo(( { children }) => {
     return (
         <div
@@ -10,74 +10,14 @@ const DefaultLayout = memo(( { children }) => {
                 <Sidebar/>
             </div>
             <div
-                className=' col-span-4 text-red-500 overflow-auto'
+                className=' col-span-4 overflow-y-auto'
             >
                 <div
                     className=' sticky top-0 left-0 right-0 bg-white'
                 >
-                    nav
+                    <Navbar/>
                 </div>
                 {children}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
             </div>
         </div>
     );
