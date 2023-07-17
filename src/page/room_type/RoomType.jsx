@@ -1,9 +1,11 @@
 import React from 'react';
-
+import Table from '../../components/room_type/Table';
 function RoomType(props) {
     return (
-        <div>
-            roomtype
+        <div
+            className='p-4'
+        >
+            <Table/>
         </div>
     );
 }
