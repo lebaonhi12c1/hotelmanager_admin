@@ -40,11 +40,25 @@ const Sidebar = memo(() => {
                         className={
                             `
                                 py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
-                                ${ get_active( 'room' ) && 'bg-blue-500' }
+                                ${ get_active( 'rooms' ) && 'bg-blue-500' }
                             `
                         }
                     >
                         Room
+                    </div>
+                </Link>
+                <Link
+                    to={ '/room-types' }
+                >
+                    <div
+                        className={
+                            `
+                                py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                                ${ get_active( 'room-types' ) && 'bg-blue-500' }
+                            `
+                        }
+                    >
+                        Room Type
                     </div>
                 </Link>
             </div>

@@ -19,8 +19,9 @@ const DefaultLayout = memo(( { children }) => {
                     <Navbar/>
                 </div>
                 {children}
+                <ToastContainer></ToastContainer>
             </div>
-            <ToastContainer></ToastContainer>
+           
         </div>
     );
 });
