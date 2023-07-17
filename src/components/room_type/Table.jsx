@@ -72,25 +72,25 @@ const Table = memo(( { value } ) => {
                                 ID
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Code
+                                Mã
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Name
+                                Tên
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Description
+                                Mô tả
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Capacity
+                                Số lượng khách
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Ảnh bìa
                             </th>
                              <th scope="col" className="px-6 py-3">
-                                Status
+                                Trạng thái
                             </th>
                              <th scope="col" className="px-6 py-3">
-                                Employee
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Action
+                                Nhân viên
                             </th>
                         </tr>
                     </thead>
@@ -105,28 +105,39 @@ const Table = memo(( { value } ) => {
                                         >
                                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {
-                                                    item.id
+                                                    item?.id
                                                 }
                                             </th>
                                             <td className="px-6 py-4">
                                                 {
-                                                    item.code
+                                                    item?.code
                                                 }
                                             </td>
                                             <td className="px-6 py-4">
                                                 {
-                                                    item.name
+                                                    item?.name
                                                 }
                                             </td>
                                             <td className="px-6 py-4">
                                                 {
-                                                    item.description
+                                                    item?.description
                                                 }
                                             </td>
                                             <td className="px-6 py-4">
                                                 {
-                                                    item.description
+                                                    item?.description
                                                 }
+                                            </td>
+                                            <td
+                                                className="px-6 py-4"
+                                            >
+                                                <div 
+                                                    className='w-[100px] h-[60px] overflow-hidden'
+                                                >
+                                                    <img className=" rounded-lg object-contain" alt="image description"
+                                                        src={ item?.ImageRoomTypes[0]?.value}
+                                                    />
+                                                </div>
                                             </td>
                                             <td
                                                 className={ 
@@ -139,7 +150,7 @@ const Table = memo(( { value } ) => {
                                                     className='px-6 py-4'
                                                >
                                                     {
-                                                        get_style_status( item.status )
+                                                        get_style_status( item?.status )
                                                     }
                                                </div>
                                             </td>
@@ -147,12 +158,16 @@ const Table = memo(( { value } ) => {
                                                  className="px-6 py-4"
                                             >
                                                 {
-                                                    item.employee
+                                                    item?.employee
                                                 }
                                             </td>
                                             <td className="px-6 py-4">
-                                                <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Edit</button>
-                                                <button type="button" className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Remove</button>
+                                               <div
+                                                    className=' flex items-center gap-2'
+                                               >
+                                                    <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Sửa</button>
+                                                    <button type="button" className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Xóa</button>
+                                               </div>
                                             </td>
                                         </tr>
                                     )
