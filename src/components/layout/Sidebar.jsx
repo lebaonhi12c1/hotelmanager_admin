@@ -75,6 +75,35 @@ const Sidebar = memo(() => {
                         Đặt phòng
                     </div>
                 </Link>
+                <Link
+                    to={ '/service' }
+                >
+                    <div
+                        className={
+                            `
+                                py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                                ${ get_active( 'service' ) && 'bg-blue-500' }
+                            `
+                        }
+                    >
+                        Dịch vụ
+                    </div>
+                </Link>
+                <Link
+                    to={ '/employees' }
+                >
+                    <div
+                        className={
+                            `
+                                py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                                ${ get_active( 'employees' ) && 'bg-blue-500' }
+                            `
+                        }
+                    >
+                        Nhân viên
+                    </div>
+                </Link>
+
             </div>
         </div>
     );
