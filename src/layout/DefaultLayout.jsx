@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import Sidebar from '../components/layout/Sidebar';
 import Navbar from './Navbar';
+import { ToastContainer } from 'react-toastify';
 const DefaultLayout = memo(( { children }) => {
     return (
         <div
@@ -19,6 +20,7 @@ const DefaultLayout = memo(( { children }) => {
                 </div>
                 {children}
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 });
