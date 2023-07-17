@@ -1,8 +1,12 @@
 
 import { uid } from 'uid';
 import {router} from './router'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useState } from 'react';
+import Login from './page/login/Login';
 function App() {
+  const [isLogin, setIsLogin] = useState(localStorage.getItem('user') ? true : false);
+  
   return (
       <div className="app">
         <Router>
@@ -17,11 +21,13 @@ function App() {
                 <Route 
                   key={ uid( 10 ) } 
                   path={route.path}
-                  element = {<Layout><Page/></Layout>}
+                  element = {isLogin?(<Layout><Page/></Layout>) : <Navigate to="/login" replace={true} />}
                 >
                 </Route>
               )
             })}
+            <Route path="/login" element={<Login/>}/>
+      
           </Routes>
         </Router>
       </div>
