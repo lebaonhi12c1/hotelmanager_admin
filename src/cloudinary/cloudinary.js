@@ -1,4 +1,4 @@
-import defautlimage from "../../public/images/banner1.jpg"
+// import defautlimage from "../../public/images/banner1.jpg"
 
 const getDataCloudinary = (image,folder)=>{
     console.log("toi", image )
@@ -11,7 +11,7 @@ const getDataCloudinary = (image,folder)=>{
         data.append('folder',folder)
         return data
     }
-    data.append('file',defautlimage)
+    data.append('file',image)
     data.append('upload_preset',"demo_upload")
     data.append('folder',folder)
     return data

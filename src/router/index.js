@@ -7,6 +7,8 @@ import Home from "../page/home/Home"
 import Payment from "../page/payment/Payment"
 import Room from "../page/room/Room"
 import RoomType from "../page/room_type/RoomType"
+import Create from "../page/room_type/create/Create"
+import Update from "../page/room_type/update/Update"
 import Service from "../page/service/Service"
 
 const router = [
@@ -39,7 +41,17 @@ const router = [
         element: Booking,
         layout: DefaultLayout,
     },
+    {
+        path: '/room-types/:id',
+        element: Update,
+        layout: DefaultLayout,
+    },
+    {
+        path: '/room-types/create',
+        element: Create,
+        layout: DefaultLayout,
 
+    },
     {
 
         path: '/payments',
