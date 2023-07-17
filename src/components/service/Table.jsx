@@ -72,19 +72,19 @@ const Table = memo(( { value } ) => {
                                 ID
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Code
+                                Mã
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Name
+                                Tên dịch vụ
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Giá dịch vụ
                             </th>
                              <th scope="col" className="px-6 py-3">
-                                Status
+                                Trạng thái
                             </th>
                              <th scope="col" className="px-6 py-3">
-                                Employee
+                                Nhân viên
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Action
@@ -139,7 +139,7 @@ const Table = memo(( { value } ) => {
                                                  className="px-6 py-4"
                                             >
                                                 {
-                                                    item.employee
+                                                    item?.Employee?.name
                                                 }
                                             </td>
                                             <td className="px-6 py-4">

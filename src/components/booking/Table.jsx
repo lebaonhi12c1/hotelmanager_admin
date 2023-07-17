@@ -1,14 +1,14 @@
 import React, { memo, useEffect, useState } from 'react';
-import RoomTypeService from '../../services/roomType.service';
 import Toast from '../../helpers/Toast';
 import { uid } from 'uid';
+import Booking from '../../services/booking.service';
 
 const Table = memo(( { value } ) => {
     
     const [ room_types, set_room_type ] = useState( null )
     const get_room_type = async() =>
     {
-        const res = await RoomTypeService.getAllRoomType()
+        const res = await Booking.getAllBooking()
         if( !res.success )
         {
             Toast.getToastError( res.message )
@@ -33,16 +33,16 @@ const Table = memo(( { value } ) => {
                 return (
                     <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">
                         {
-                            "Công khai"
+                            value
                         }
                     </span>
                 )
-            case 'draft':
+            case 'spending':
                 return (
                     <span className="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
 
                         {
-                            "Nháp"
+                            value
                         }
                     </span>
 
@@ -68,29 +68,26 @@ const Table = memo(( { value } ) => {
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope='col' className='px-6 py-3'>
                                 ID
                             </th>
-                            <th scope="col" className="px-6 py-3">
-                                Mã
+                            <th scope='col' className='px-6 py-3'>
+                                khách hàng
                             </th>
-                            <th scope="col" className="px-6 py-3">
-                                Tên
+                            <th scope='col' className='px-6 py-3'>
+                                phòng
                             </th>
-                            <th scope="col" className="px-6 py-3">
-                                Mô tả
+                            <th scope='col' className='px-6 py-3'>
+                                ngày dụ kiến nhận
                             </th>
-                            <th scope="col" className="px-6 py-3">
-                                Số lượng khách
+                            <th scope='col' className='px-6 py-3'>
+                                ngày dự kiến trả
                             </th>
-                            <th scope="col" className="px-6 py-3">
-                                Ảnh bìa
+                            <th scope='col' className='px-6 py-3'>
+                                trạng thái
                             </th>
-                             <th scope="col" className="px-6 py-3">
-                                Trạng thái
-                            </th>
-                             <th scope="col" className="px-6 py-3">
-                                Nhân viên
+                            <th scope='col' className='px-6 py-3'>
+                                nhân viên
                             </th>
                         </tr>
                     </thead>
@@ -110,55 +107,36 @@ const Table = memo(( { value } ) => {
                                             </th>
                                             <td className="px-6 py-4">
                                                 {
-                                                    item?.code
+                                                    item?.Customer?.name
                                                 }
                                             </td>
                                             <td className="px-6 py-4">
                                                 {
-                                                    item?.name
+                                                    item?.Room?.code
                                                 }
                                             </td>
                                             <td className="px-6 py-4">
                                                 {
-                                                    item?.description
+                                                    item?.checkInDate
                                                 }
                                             </td>
                                             <td className="px-6 py-4">
                                                 {
-                                                    item?.capacity
+                                                    item?.checkOutDate
                                                 }
                                             </td>
                                             <td
                                                 className="px-6 py-4"
                                             >
-                                                <div 
-                                                    className='w-[100px] h-[60px] overflow-hidden'
-                                                >
-                                                    <img className=" rounded-lg object-contain" alt="image description"
-                                                        src={ item?.ImageRoomTypes[0]?.value}
-                                                    />
-                                                </div>
-                                            </td>
-                                            <td
-                                                className={ 
-                                                    `
-                                                        px-6 py-4
-                                                    `
-                                                }
-                                            >
-                                               <div 
-                                                    className='px-6 py-4 whitespace-nowrap'
-                                               >
-                                                    {
-                                                        get_style_status( item?.status )
-                                                    }
-                                               </div>
+                                               {
+                                                    get_style_status( item?.status )
+                                               }
                                             </td>
                                             <td 
                                                  className="px-6 py-4 whitespace-nowrap"
                                             >
                                                 {
-                                                    item?.Employee?.name
+                                                    item?.employee || 'Chưa có'
                                                 }
                                             </td>
                                             <td className="px-6 py-4">
@@ -166,7 +144,6 @@ const Table = memo(( { value } ) => {
                                                     className=' flex items-center gap-2'
                                                >
                                                     <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Sửa</button>
-                                                    <button type="button" className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Xóa</button>
                                                </div>
                                             </td>
                                         </tr>

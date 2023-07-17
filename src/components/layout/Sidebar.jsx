@@ -30,7 +30,7 @@ const Sidebar = memo(() => {
                             ${ router.pathname === '/' && 'bg-blue-500'}
                         ` }
                     >
-                        Home
+                        Trang chủ
                     </div>
                 </Link>
                 <Link
@@ -44,7 +44,7 @@ const Sidebar = memo(() => {
                             `
                         }
                     >
-                        Room
+                        Phòng
                     </div>
                 </Link>
                 <Link
@@ -58,7 +58,21 @@ const Sidebar = memo(() => {
                             `
                         }
                     >
-                        Room Type
+                        Loại phòng
+                    </div>
+                </Link>
+                <Link
+                    to={ '/bookings' }
+                >
+                    <div
+                        className={
+                            `
+                                py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                                ${ get_active( 'bookings' ) && 'bg-blue-500' }
+                            `
+                        }
+                    >
+                        Đặt phòng
                     </div>
                 </Link>
                 <Link
@@ -73,6 +87,20 @@ const Sidebar = memo(() => {
                         }
                     >
                         Dịch vụ
+                    </div>
+                </Link>
+                <Link
+                    to={ '/employees' }
+                >
+                    <div
+                        className={
+                            `
+                                py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                                ${ get_active( 'employees' ) && 'bg-blue-500' }
+                            `
+                        }
+                    >
+                        Nhân viên
                     </div>
                 </Link>
 
