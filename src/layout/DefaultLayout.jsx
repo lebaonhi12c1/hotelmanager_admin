@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import Sidebar from '../components/layout/Sidebar';
-
+import { ToastContainer } from 'react-toastify';
 const DefaultLayout = memo(( { children }) => {
     return (
         <div
@@ -79,6 +79,7 @@ const DefaultLayout = memo(( { children }) => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, unde eveniet, natus dolore, esse rem nihil praesentium accusantium corporis provident debitis accusamus quod vel ut tempora porro quaerat vero quibusdam.
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 });
