@@ -3,7 +3,7 @@ import Table from '../../components/booking/Table';
 
 function Booking(props) {
     return (
-        <div>
+        <div className='p-4'>
             <Table/>
         </div>
     );
