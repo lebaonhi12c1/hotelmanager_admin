@@ -61,6 +61,20 @@ const Sidebar = memo(() => {
                         Room Type
                     </div>
                 </Link>
+                <Link
+                    to={ '/bookings' }
+                >
+                    <div
+                        className={
+                            `
+                                py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                                ${ get_active( 'bookings' ) && 'bg-blue-500' }
+                            `
+                        }
+                    >
+                        Booking
+                    </div>
+                </Link>
             </div>
         </div>
     );
