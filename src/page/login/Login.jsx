@@ -5,12 +5,15 @@ import { MdPassword } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import AuthenticationService from '../../services/authentication.service';
 import alert from '../../helpers/alert';
+import { useDispatch } from 'react-redux';
+import { setIsLogin } from '../../store/auth/auth.reducer';
 
 
 function Login(props) {
     const route = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [isLoading, setIsLoading] = useState(true)
+    const dispatch = useDispatch()
 
     const onSubmit = async (data) => {
         setIsLoading(false)
@@ -20,10 +23,11 @@ function Login(props) {
         if (res.status == 200) {
             alert.getAlert("Đăng nhập thành công.", "success", 2700, false)
             setTimeout(() => {
-                handleLogin(res.data.token)
+                dispatch(setIsLogin(true))
+                localStorage.setItem('user', res)
                 route('/')
 
-            }, 2500)
+            }, 2600)
             return
         }
 
