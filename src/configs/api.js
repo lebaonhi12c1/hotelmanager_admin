@@ -38,3 +38,8 @@ export const API_CREATE_CUSTOMER = `${import.meta.env.VITE_API_URL}`+'/api/custo
 //STATUS ROOM
 export const API_GET_ALL_STATUS_ROOM = `${import.meta.env.VITE_API_URL}` + '/api/status-room'
 export const API_CREATE_STATUS_ROOM = `${import.meta.env.VITE_API_URL}` + '/api/status-room'
+
+
+// PAYMENT 
+export const API_GET_ALL_PAYMENT = `${import.meta.env.VITE_API_URL}` + '/api/payment'
+export const API_CREATE_PAYMENT = `${import.meta.env.VITE_API_URL}` + '/api/payment'

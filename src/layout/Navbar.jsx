@@ -6,9 +6,9 @@ const Navbar = memo(() => {
 
     return (
         <div
-            className='p-4 flex justify-between border-b-2'
+            className='p-4 flex justify-between border-b-2 z-10'
         >
-            <div>
+            <div className='z-10'>
                 <div className="flex items-center gap-5 w-[300px] border border-gray-200 rounded-lg py-3 px-5">
                   <span className="flex-shrink-0 text-gray-500">
                     <svg

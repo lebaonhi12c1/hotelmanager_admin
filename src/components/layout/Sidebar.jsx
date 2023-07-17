@@ -76,6 +76,20 @@ const Sidebar = memo(() => {
                     </div>
                 </Link>
                 <Link
+                    to={ '/payments' }
+                >
+                    <div
+                        className={
+                            `
+                                py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                                ${ get_active( 'payments' ) && 'bg-blue-500' }
+                            `
+                        }
+                    >
+                        Thanh toán
+                    </div>
+                </Link>
+                <Link
                     to={ '/service' }
                 >
                     <div
@@ -103,7 +117,34 @@ const Sidebar = memo(() => {
                         Nhân viên
                     </div>
                 </Link>
-
+                <Link
+                    to={ '/customers' }
+                >
+                    <div
+                        className={
+                            `
+                                py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                                ${ get_active( 'customers' ) && 'bg-blue-500' }
+                            `
+                        }
+                    >
+                        Khách hàng
+                    </div>
+                </Link>
+                <Link
+                    to={ '/availble-room' }
+                >
+                    <div
+                        className={
+                            `
+                                py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                                ${ get_active( 'availble-room' ) && 'bg-blue-500' }
+                            `
+                        }
+                    >
+                        Tìm phòng có sẳn
+                    </div>
+                </Link>
             </div>
         </div>
     );
