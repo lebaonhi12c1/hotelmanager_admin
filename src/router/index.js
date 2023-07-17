@@ -2,6 +2,7 @@ import DefaultLayout from "../layout/DefaultLayout"
 import Home from "../page/home/Home"
 import Room from "../page/room/Room"
 import RoomType from "../page/room_type/RoomType"
+import Service from "../page/service/Service"
 
 const router = [
     {
@@ -17,6 +18,11 @@ const router = [
     {
         path: '/room-types',
         element: RoomType,
+        layout: DefaultLayout,
+    },
+    {
+        path: '/service',
+        element: Service,
         layout: DefaultLayout,
     },
 ]

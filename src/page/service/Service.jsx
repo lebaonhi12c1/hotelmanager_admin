@@ -1,7 +1,7 @@
 import React from 'react';
-import Table from '../../components/room/Table';
+import Table from '../../components/service/Table';
 
-function Room(props) {
+function Service(props) {
     return (
         <div
             className='p-4'
@@ -11,4 +11,4 @@ function Room(props) {
     );
 }
 
-export default Room;
+export default Service;
