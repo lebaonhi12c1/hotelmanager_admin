@@ -24,7 +24,7 @@ function Login(props) {
             alert.getAlert("Đăng nhập thành công.", "success", 2700, false)
             setTimeout(() => {
                 dispatch(setIsLogin(true))
-                localStorage.setItem('user', res)
+                localStorage.setItem('user', JSON.stringify( res.data ))
                 route('/')
 
             }, 2600)

@@ -145,6 +145,20 @@ const Sidebar = memo(() => {
                         Tìm phòng có sẳn
                     </div>
                 </Link>
+                <Link
+                    to={ '/check' }
+                >
+                    <div
+                        className={
+                            `
+                                py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                                ${ get_active( 'check' ) && 'bg-blue-500' }
+                            `
+                        }
+                    >
+                        CheckIn/CheckOut
+                    </div>
+                </Link>
             </div>
         </div>
     );
