@@ -142,7 +142,7 @@ const Sidebar = memo(() => {
                             `
                         }
                     >
-                        Tìm phòng có sẳn
+                        Trạng thái phòng
                     </div>
                 </Link>
                 <Link

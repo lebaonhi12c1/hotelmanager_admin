@@ -6,7 +6,7 @@ const Navbar = memo(() => {
 
     return (
         <div
-            className='p-4 flex justify-between border-b-2 z-10'
+            className='p-4 flex justify-between border-b-2'
         >
             <div className='z-10'>
                 <div className="flex items-center gap-5 w-[300px] border border-gray-200 rounded-lg py-3 px-5">

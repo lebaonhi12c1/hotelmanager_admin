@@ -16,13 +16,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                 Chi tiết đơn đặt phòng
                             </h3>
                         </div>
-                        
-                        <div className="p-6 space-y-6">
-                            {
-                                JSON.stringify( value )
-                            }
-                        </div>
-                        
+                         
                         <div
                             className='flex flex-col gap-4 p-4'
                         >
@@ -158,18 +152,62 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                    }
                                 </div>
                             </div>
-                            {/* <div
-                                className='flex flex-col'
+                            <div
+                                className='flex flex-col gap-2'
                             >
-                                {
-                                    value?.ServiceOfBookings?.map(
-                                        item =>
-                                        {
-                                            
-                                        }
-                                    )
-                                }
-                            </div> */}
+                                <div
+                                    className=' font-medium'
+                                >
+                                    Dịch vụ kèm theo
+                                </div>
+                                <div>
+                                    {
+                                        value?.ServiceOfBookings?.map(
+                                            item =>
+                                            {
+                                                return (
+                                                    <div className=" flex items-center gap-4 p-4 rounded-lg border"
+                                                        key={ uid(10) }
+                                                    >
+                                                        <div
+                                                            className='flex items-center gap-2'
+                                                        >
+                                                            <div>
+                                                                Tên dịch vụ:
+                                                            </div>
+                                                            <div>
+                                                                {
+                                                                    item?.Service?.name
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            className='flex items-center gap-2 pl-4 border-l'
+                                                        >
+                                                            <div>
+                                                                Giá:
+                                                            </div>
+                                                            <div
+                                                                className='text-red-500'
+                                                            >
+                                                                {
+                                                                    get_format_price( item?.Service?.amount )
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }
+                                        )
+                                    }
+                                    {
+                                        value?.ServiceOfBookings?.length <=0 &&
+                                        (
+                                            'Không có dịch vụ kèm theo'
+                                        )
+                                    }
+                                </div>
+                            </div>
                             <div
                                 className='flex items-center gap-2'
                             >

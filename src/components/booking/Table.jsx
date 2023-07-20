@@ -94,8 +94,9 @@ const Table = memo(() => {
         }
     };
 
-    const handle_set_dinalog = ( value ) =>
+    const handle_set_dinalog = ( value, e ) =>
     {
+        e.stopPropagation()
         set_value(
             value
         )
@@ -197,11 +198,12 @@ const Table = memo(() => {
                                                     `text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ${ item.status === 'cancelled' && 'cursor-not-allowed' }`
                                                 }
                                                 onClick={
-                                                    () => handle_set_dinalog( 
+                                                    (e) => handle_set_dinalog( 
                                                         {
                                                             id: item.id,
                                                             value: 'cancelled'
-                                                        }
+                                                        },
+                                                        e
                                                      )
                                                 }
                                                 disabled = { item.status === 'cancelled' }
@@ -215,11 +217,12 @@ const Table = memo(() => {
 
                                                 }
                                                 onClick={
-                                                    () => handle_set_dinalog( 
+                                                    (e) => handle_set_dinalog( 
                                                         {
                                                             id: item.id,
                                                             value: 'confirmed'
-                                                        }
+                                                        },
+                                                        e
                                                      )
                                                 }
                                                 disabled = { item.status !== 'spending' }

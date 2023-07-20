@@ -14,7 +14,7 @@ const DefaultLayout = memo(( { children }) => {
                 className=' col-span-4 overflow-y-auto'
             >
                 <div
-                    className=' sticky top-0 left-0 right-0 bg-white'
+                    className=' sticky top-0 left-0 right-0 bg-white z-50'
                 >
                     <Navbar/>
                 </div>
