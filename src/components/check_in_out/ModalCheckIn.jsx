@@ -1,4 +1,4 @@
-import React, { memo, useContext, useState } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import { modal_check_in } from '../../context/check_in_out/ModalCheckInContext';
 import Fetch from '../../helpers/fetch';
 import Toast from '../../helpers/Toast';
@@ -7,7 +7,7 @@ const ModalCheckIn = memo(( { handle_get_data } ) => {
 
     const { check_in_info, set_check_in_info } = useContext( modal_check_in )
     const [ description, set_description ] = useState( '' )
-
+    
     const handle_submit = async() =>
     {
         console.log(' render')
@@ -15,7 +15,7 @@ const ModalCheckIn = memo(( { handle_get_data } ) => {
             `${import.meta.env.VITE_API_URL}/api/booking/check-in`,
             {
                 booking: check_in_info?.id,
-                employee: JSON.parse( localStorage.get( 'user' )).id,
+                employee: JSON.parse( localStorage.getItem( 'user' )).id,
                 description,
             }
         )
@@ -29,6 +29,15 @@ const ModalCheckIn = memo(( { handle_get_data } ) => {
         await handle_get_data()
         set_check_in_info( null )
     }
+
+    useEffect(() => {
+        const init = async () => {
+          const { Select, initTE } = await import("tw-elements");
+          initTE({  Select });
+        };
+        init();
+    }, []);
+
     return (
         check_in_info && 
         <div>
@@ -47,6 +56,13 @@ const ModalCheckIn = memo(( { handle_get_data } ) => {
                         <div
                             className='flex flex-col gap-2 p-4'
                         >
+                            <select data-te-select-init
+                                className='w-fit'
+                            >
+                                <option value="1">Passport</option>
+                                <option value="2">CMND/CCCD</option>
+                                <option value="3">Khác</option>
+                            </select>
                             <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Ghi chú
                             </label>

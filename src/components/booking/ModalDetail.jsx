@@ -18,7 +18,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                         </div>
                          
                         <div
-                            className='flex flex-col gap-4 p-4'
+                            className='flex flex-col gap-4 p-4 max-h-[500px] overflow-auto'
                         >
                             <div
                                 className='flex items-center gap-2'
@@ -26,7 +26,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                 <div>
                                     Mã đơn đặt phòng:
                                 </div>
-                                <div>
+                                <div className=' font-medium italic text-blue-500'>
                                    {
                                     value?.id
                                    }
@@ -38,7 +38,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                 <div>
                                     Tên khách hàng:
                                 </div>
-                                <div>
+                                <div className=' font-medium italic text-blue-500'>
                                    {
                                     value?.Customer?.name
                                    }
@@ -50,7 +50,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                 <div>
                                     Email:
                                 </div>
-                                <div>
+                                <div className=' font-medium italic text-blue-500'>
                                    {
                                     value?.Customer?.email
                                    }
@@ -62,7 +62,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                 <div>
                                     Số điện thoại:
                                 </div>
-                                <div>
+                                <div className=' font-medium italic text-blue-500'>
                                    {
                                     value?.Customer?.phone
                                    }
@@ -74,7 +74,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                 <div>
                                     Phòng:
                                 </div>
-                                <div>
+                                <div className=' font-medium italic text-blue-500'>
                                    {
                                     value?.Room?.name
                                    }
@@ -86,7 +86,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                 <div>
                                     Mã phòng:
                                 </div>
-                                <div>
+                                <div className=' font-medium italic text-blue-500'>
                                    {
                                     value?.Room?.code
                                    }
@@ -110,7 +110,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                 <div>
                                     Ngày dự kiến nhận phòng:
                                 </div>
-                                <div>
+                                <div className=' font-medium italic text-blue-500'>
                                    {
                                         format_date(value?.checkInDate)
                                    }
@@ -122,7 +122,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                 <div>
                                     Ngày dự kiến trả phòng:
                                 </div>
-                                <div>
+                                <div className=' font-medium italic text-blue-500'>
                                    {
                                         format_date(value?.checkOutDate)
                                    }
@@ -134,7 +134,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                 <div>
                                     Ngày nhận phòng:
                                 </div>
-                                <div>
+                                <div className=' font-medium italic text-blue-500'>
                                    {
                                         formatDate(value?.CheckIn?.date)
                                    }
@@ -146,7 +146,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                 <div>
                                     Ngày trả phòng:
                                 </div>
-                                <div>
+                                <div className=' font-medium italic text-blue-500'>
                                    {
                                         formatDate(value?.CheckOut?.date)
                                    }
@@ -160,7 +160,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                 >
                                     Dịch vụ kèm theo
                                 </div>
-                                <div>
+                                <div className='flex flex-col gap-2'>
                                     {
                                         value?.ServiceOfBookings?.map(
                                             item =>
@@ -175,7 +175,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                                             <div>
                                                                 Tên dịch vụ:
                                                             </div>
-                                                            <div>
+                                                            <div className=' font-medium italic text-blue-500'>
                                                                 {
                                                                     item?.Service?.name
                                                                 }
@@ -251,7 +251,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                                             <div>
                                                                 Ngày thanh toán:
                                                             </div>
-                                                            <div className=''>
+                                                            <div className=' font-medium italic text-blue-500'>
                                                             {
                                                                     formatDate( item?.paymentDate )
                                                             }
@@ -263,7 +263,7 @@ const ModalDetail = memo(( { value, handle_close }) => {
                                                             <div>
                                                                 Phương thức thanh toán:
                                                             </div>
-                                                            <div className=''>
+                                                            <div className=' font-medium italic text-blue-500'>
                                                             {
                                                                     item?.paymentMethod
                                                             }

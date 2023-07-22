@@ -79,7 +79,7 @@ const Navbar = memo(() => {
                             />
                         </div>
                         <div>
-                            username
+                            Admin
                         </div>
                     </div>
                   </div>

@@ -11,12 +11,12 @@ const Sidebar = memo(() => {
 
     return (
         <div
-            className='flex flex-col bg-blue-900 text-white h-full'
+            className='flex flex-col bg-black/90 text-white h-full'
         >
             <div
-                className='p-4 border-b-2'
+                className='p-4 border-b-2 bg-yellow-400 text-black'
             >
-                logo
+                Khách sạn QN
             </div>
             <div
                 className='flex flex-col'
@@ -30,7 +30,7 @@ const Sidebar = memo(() => {
                             ${ router.pathname === '/' && 'bg-blue-500'}
                         ` }
                     >
-                        Trang chủ
+                        Số liệu thống kê
                     </div>
                 </Link>
                 <Link

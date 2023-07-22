@@ -151,7 +151,9 @@ const Table = memo(() => {
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody
+                    
+                    >
                         {room_types?.map((item) => {
                             return (
                                 <tr

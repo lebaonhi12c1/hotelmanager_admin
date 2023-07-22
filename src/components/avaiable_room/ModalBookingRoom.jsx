@@ -5,6 +5,7 @@ import Toast from '../../helpers/Toast';
 import _isEmpty from 'lodash/isEmpty'
 import ContainerInfoUser from './ContainerInfoUser';
 import FormRegisterAccountUser from './FormRegisterAccountUser';
+import BookingRoom from './BookingRoom';
 
 const ModalBookingRoom = memo(() => {
     const { booking_detail, set_booking_detail } = useContext( bookingContext)
@@ -28,7 +29,7 @@ const ModalBookingRoom = memo(() => {
 
         if( !res.success )
         {
-            Toast.getToastError( 'Khách hàng không óc trong hệ thống !' )
+            Toast.getToastError( 'Khách hàng không có trong hệ thống !' )
             return
         }
         
@@ -52,7 +53,7 @@ const ModalBookingRoom = memo(() => {
                             </h3>
                         </div>
                         
-                        <div className="p-6 space-y-6">
+                        <div className="p-6 space-y-6 max-h-[500px] overflow-auto">
                             <div 
                                 className='flex items-center gap-2'
                             >
@@ -76,7 +77,7 @@ const ModalBookingRoom = memo(() => {
                                   <input
                                     type="text"
                                     className="w-full outline-none bg-transparent"
-                                    placeholder="Enter your content..."
+                                    placeholder="Nhập số điện thoại..."
                                     onChange={
                                         e =>set_filter_phone( e.target.value )
                                     }
@@ -108,12 +109,17 @@ const ModalBookingRoom = memo(() => {
                                     />
                                 )
                            }
+                           {
+                                customer && 
+                                (
+                                    <BookingRoom
+                                        value= { customer }
+                                    />
+                                )
+                           }
                         </div>
                         
                         <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                            <button data-modal-hide="staticModal" type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                Đặt phòng
-                            </button>
                             <button data-modal-hide="staticModal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                                 onClick={
                                     () => set_booking_detail( false )

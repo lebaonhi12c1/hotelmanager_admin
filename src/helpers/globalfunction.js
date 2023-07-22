@@ -1,5 +1,16 @@
-import { isDate } from "lodash";
 
+import { format, parse } from 'date-fns';
+
+export function formatDateToISO(inputDate) {
+  console.log( inputDate)
+  // Chuyển đổi ngày đầu vào sang đối tượng Date
+  const dateObject = parse(inputDate, 'dd/MM/yyyy', new Date());
+
+  // Chuyển đổi thành chuỗi ngày tháng có định dạng "yyyy-MM-dd"
+  const formattedDate = format(dateObject, 'yyyy-MM-dd');
+
+  return formattedDate;
+}
 export const format_date = dateString =>
 {
 
@@ -58,3 +69,12 @@ export const  convertToLowerCase = (str) =>
     .replace(/\s+/g, '')
     .toLowerCase();         
 }
+
+
+export const get_day_of_time = (d1, d2) => {
+  const date2 = new Date(d2)
+  const date1 = new Date(d1)
+  let ms1 = date1.getTime();
+  let ms2 = date2.getTime();
+  return Math.ceil((ms2 - ms1) / (24*60*60*1000));
+};

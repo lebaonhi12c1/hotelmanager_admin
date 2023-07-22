@@ -3,9 +3,9 @@ import React, { memo } from 'react';
 const ContainerInfoUser = memo(( { value } ) => {
     return (
         <div
-            className='p-4 rounded-lg'
+            className=' rounded-lg'
         >
-            <blockquote className="p-4 my-4 border-l-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800">
+            <blockquote className="p-4 border-l-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800">
                 <div className=" italic leading-relaxed text-gray-900 dark:text-white">
                     <div
                         className='flex items-center gap-2'
