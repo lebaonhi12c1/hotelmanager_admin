@@ -14,6 +14,7 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
     const [ description, set_description ] = useState( '' )
     const [ services, set_services ] = useState( null )
     const [selectedServices, setSelectedServices] = useState([]);
+    const [ is_payment, set_is_payment ] = useState( null )
     const handle_submit = async() =>
     {
         const res = await Fetch.make().post(
@@ -315,14 +316,35 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
                                 >
     
                                 </textarea>
+
                             </div>
-                            <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
-                                onClick={
-                                    () => set_modal_payment( true )
-                                }
-                            >
-                                Tạo phiếu thanh toán
-                            </button>
+                            {
+                                
+                                ( get_payment() !== 0  || !is_payment) &&
+                                (
+                                    <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
+                                        onClick={
+                                            () => set_modal_payment( true )
+                                        }
+                                    >
+                                        Tạo phiếu thanh toán
+                                    </button>
+                                )
+                            }
+                            {
+                                ( get_payment() === 0  || is_payment ) &&
+                                (
+                                    <button data-modal-hide="defaultModal" type="button" className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                                        onClick={
+                                            handle_submit
+                                        }
+                                    >
+
+                                        Check Out
+                                    </button>
+                                )
+                            }
+                            
                         </div>
 
 
@@ -351,6 +373,14 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
             <ModalCreatePayment
                 is_open = { modal_payment }
                 handle_close = { set_modal_payment }
+                handle_is_payment = { set_is_payment }
+                value =
+                {
+                    {
+                        ...check_out_info,
+                        payment_total: get_payment()
+                    }
+                }
             />
         </div>
     );
