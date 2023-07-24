@@ -1,6 +1,6 @@
 import React, { memo, useContext, useEffect, useState } from 'react';
 import { bookingContext } from '../../context/booking/BookingContext';
-import { get_day_of_time, get_format_price, formatDateToISO } from '../../helpers/globalfunction';
+import { get_day_of_time, get_format_price } from '../../helpers/globalfunction';
 import Fetch from '../../helpers/fetch'
 import Toast from '../../helpers/Toast'
 import { uid } from 'uid';
@@ -83,15 +83,6 @@ const BookingRoom = memo(( { value } ) => {
         ,[]
     )
     
-    useEffect(() => {
-        const init = async () => {
-          const { Select, initTE } = await import("tw-elements");
-          initTE({  Select });
-        };
-        init();
-    }, []);
-
-
 
     useEffect(
         () =>
@@ -234,24 +225,29 @@ const BookingRoom = memo(( { value } ) => {
                         );
                     })}
                 </div>
-                <select data-te-select-init data-te-select-filter="true"
-                    name='status'
-                    onChange={
-                        e => set_status( e.target.value )
-                    }
-                >
-                    <option value="confirmed">Đã xác nhận</option>
-                    <option value="checkedIn">Check In</option>
-                 </select>
-                 <select data-te-select-init data-te-select-filter="true"
-                    name='paymentMethod'
-                    onChange={
-                        e => set_payment_method( e.target.value )
-                    }
-                >
-                    <option value="Tiền mặt">Tiền mặt</option>
-                    <option value="Chuyển khoản">Chuyển khoản</option>
-                 </select>
+                 
+                <div>
+                    <label htmlFor="years" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+                    <select id="years" size="5" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        onChange={
+                            e => set_status( e.target.value )
+                        }
+                    >
+                        <option value="confirmed">Đã xác nhận</option>
+                        <option value="checkedIn">Check In</option>
+                    </select>
+                </div>
+                <div>
+                    <label htmlFor="payment_method" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+                    <select id="payment_method" size="5" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        onChange={
+                            e => set_payment_method( e.target.value )
+                        }
+                    >
+                        <option value="Tiền mặt">Tiền mặt</option>
+                        <option value="Chuyển khoản">Chuyển khoản</option>
+                    </select>
+                </div>
                  <div
                     className='flex items-center gap-2'
                  >

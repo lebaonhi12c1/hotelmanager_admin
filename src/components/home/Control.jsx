@@ -5,16 +5,8 @@ import { filterContext } from '../../context/home/filterReport';
 
 const Control = memo(() => {
     const [ filter, set_fitler ] = useState( 'week' )
-    const { set_donut } = useContext( filterContext )
-    useEffect(() => {
-        const init = async () => {
-          const { Select, initTE } = await import("tw-elements");
-          initTE({  Select });
-        };
-        init();
-    }, []);
-
-    const get_report = async() =>
+    const { set_donut, set_line } = useContext( filterContext )
+    const get_report_donut = async() =>
     {
         const res = await Fetch.make().post(
             `${ import.meta.env.VITE_API_URL }/api/report/percent-roomtype`,
@@ -31,17 +23,38 @@ const Control = memo(() => {
         set_donut( res.data )
     }
 
+    const get_report_line = async() =>
+    {
+        const res = await Fetch.make().post(
+            `${ import.meta.env.VITE_API_URL }/api/report/quantity-of-date`,
+            {
+                dimension: filter
+            }
+        )
+
+        if( !res.success )
+        {
+            Toast.getToastError( res.message )
+            return
+        }
+        set_line( res.data )
+    }
+
     useEffect(
         () =>
         {
-            get_report()
+            get_report_donut()
+            get_report_line()
         },[ filter ]
     )
 
     return (
-        <div className='w-fit flex items-center gap-4'>
-            <select data-te-select-init
-            
+        <div className='w-fit flex items-center gap-4'>  
+            <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                Lọc theo:
+            </label>
+            <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                
                 onChange={
                     e => set_fitler( e.target.value )
                 }
@@ -51,9 +64,7 @@ const Control = memo(() => {
                 <option value="quarter">Quý qua</option>
                 <option value="year">Năm qua</option>
             </select>
-            {/* <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
-                Lọc
-            </button> */}
+
         </div>
     );
 });

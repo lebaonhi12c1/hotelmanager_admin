@@ -13,8 +13,8 @@ const CardWidget = memo(( { value }) => {
                     }
                     <AiOutlineNumber/>
                 </h5>
-                <p className=" text-base text-neutral-600 dark:text-neutral-200 flex items-center gap-2 text-[40px]">
-                    <div className='text-green-500'>
+                <div className=" text-base text-neutral-600 dark:text-neutral-200 flex items-center gap-2">
+                    <div className='text-green-500 text-[30px]'>
                         <CountUp
                             start={ 0 }
                             end={ 
@@ -22,7 +22,7 @@ const CardWidget = memo(( { value }) => {
                              }
                         />
                     </div> / { value?.total}
-                </p>
+                </div>
                 <span className='italic text-slate-400 text-[14px]'>Đang hoạt động</span>
             </div>
         </div>

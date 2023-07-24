@@ -2,6 +2,7 @@ import React, { memo, useContext, useState } from 'react';
 import { formatDate, format_date, get_format_price } from '../../helpers/globalfunction';
 import { modal_check_in } from '../../context/check_in_out/ModalCheckInContext';
 import { check_out_context } from '../../context/check_in_out/ModalCheckOutContext';
+import { uid } from 'uid';
 
 const CardBookingCheckInOut = memo(( { value } ) => {
 
@@ -23,7 +24,7 @@ const CardBookingCheckInOut = memo(( { value } ) => {
                         Tên khách hàng:
                     </span>
                     <span
-                        className=' font-medium'
+                        className=' font-medium italic text-slate-500'
                     >
                         {
                             value?.Customer?.name
@@ -37,7 +38,7 @@ const CardBookingCheckInOut = memo(( { value } ) => {
                         Email:
                     </span>
                     <span
-                        className=' font-medium'
+                        className=' font-medium italic text-slate-500'
                     >
                         {
                             value?.Customer?.email
@@ -51,7 +52,7 @@ const CardBookingCheckInOut = memo(( { value } ) => {
                         Phòng:
                     </span>
                     <span
-                        className=' font-medium'
+                        className=' font-medium italic text-slate-500'
                     >
                         {
                             value?.room
@@ -68,9 +69,60 @@ const CardBookingCheckInOut = memo(( { value } ) => {
                         className=' font-medium text-red-500'
                     >
                         {
-                           get_format_price( value?.total )
+                           get_format_price( 
+                                value?.total
+                            )
                         }
                     </span>
+                </div>
+                <div
+                    className='flex items-center gap-2'
+                >
+                    <span>
+                        Đã thanh toán:
+                    </span>
+                    <span
+                        className=' font-medium text-red-500'
+                    >
+                        {
+                           get_format_price( value?.Payments?.reduce(
+                                    ( total, item ) => total + Number(item?.paymentAmount),
+                                    0
+                                ),
+                            )
+                        }
+                    </span>
+                </div>
+                <div
+                    className='flex items-center gap-2'
+                >
+                    <div>
+                        Dịch vụ:
+                    </div>
+                    {
+                        value?.ServiceOfBookings?.map(
+                            item => {
+                                return (
+                                    <div className=" text-blue-500" 
+                                        key={ uid( 10 ) }
+                                    >
+                                        {
+                                            item?.Service?.name
+                                        }
+                                    </div>
+                                )
+                            }
+                        )
+                        
+                    }
+                    {
+                        value?.ServiceOfBookings.length <= 0 && 
+                        (
+                            <div className=' text-blue-500'>
+                                Chưa có
+                            </div>
+                        )
+                    }
                 </div>
                 <div
                     className='flex items-center gap-2'
@@ -79,7 +131,7 @@ const CardBookingCheckInOut = memo(( { value } ) => {
                         Ngày dự kiến check in:
                     </span>
                     <span
-                        className=' font-medium'
+                        className=' font-medium italic text-slate-500'
                     >
                         {
                            format_date( value?.checkInDate )
@@ -93,7 +145,7 @@ const CardBookingCheckInOut = memo(( { value } ) => {
                         Ngày dự kiến check out:
                     </span>
                     <span
-                        className=' font-medium'
+                        className=' font-medium italic text-slate-500'
                     >
                         {
                            format_date( value?.checkOutDate)
@@ -107,7 +159,7 @@ const CardBookingCheckInOut = memo(( { value } ) => {
                         Ngày check in:
                     </span>
                     <span
-                        className=' font-medium'
+                        className=' font-medium italic text-slate-500'
                     >
                         {
                             
@@ -122,7 +174,7 @@ const CardBookingCheckInOut = memo(( { value } ) => {
                         Ngày check out:
                     </span>
                     <span
-                        className=' font-medium'
+                        className=' font-medium italic text-slate-500'
                     >
                         {
                             
