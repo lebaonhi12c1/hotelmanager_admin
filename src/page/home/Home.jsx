@@ -3,6 +3,7 @@ import ListWidget from '../../components/home/ListWidget';
 import LineChart from '../../components/home/LineChart';
 import DonutChart from '../../components/home/DonutChart';
 import Control from '../../components/home/Control';
+import Sumary from '../../components/home/Sumary';
 function Home(props) {
     return (
         <div
@@ -10,6 +11,7 @@ function Home(props) {
         >
             <ListWidget/>
             <Control/>
+            <Sumary/>
             <div
                 className='grid grid-cols-3 gap-4'
             >

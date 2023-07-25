@@ -72,7 +72,7 @@ const Sidebar = memo(() => {
                             `
                         }
                     >
-                        Đặt phòng
+                        Đơn đặt phòng
                     </div>
                 </Link>
                 <Link
@@ -157,6 +157,20 @@ const Sidebar = memo(() => {
                         }
                     >
                         CheckIn/CheckOut
+                    </div>
+                </Link>
+                <Link
+                    to={ '/bookingroom' }
+                >
+                    <div
+                        className={
+                            `
+                                py-2 px-4 hover:bg-blue-500/50 hover:text-white cursor-pointer
+                                ${ get_active( 'bookingroom' ) && 'bg-blue-500' }
+                            `
+                        }
+                    >
+                        Đặt phòng
                     </div>
                 </Link>
             </div>

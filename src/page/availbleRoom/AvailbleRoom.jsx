@@ -3,14 +3,12 @@ import ListFilter from '../../components/avaiable_room/ListFilter';
 import { formatDateToYYYYMMDD } from '../../helpers/globalfunction';
 import Fetch from '../../helpers/fetch';
 import Toast from '../../helpers/Toast';
-import ModalBookingRoom from '../../components/avaiable_room/ModalBookingRoom';
-import { bookingContext } from '../../context/booking/BookingContext';
 
 function Availble(props) {
     const [ filter, set_filter ] = useState( formatDateToYYYYMMDD( new Date() ) )
+    // const [ end_date, set_end_date ] = useState( formatDateToYYYYMMDD( new Date( new Date().getTime() + 24 * 60 * 60 * 1000)) )
 
     const [ room, set_room ] = useState( [] )
-    const { booking_detail } = useContext( bookingContext )
     const get_rooms = async() =>
     {
         const res = await Fetch.make().post(
@@ -74,12 +72,6 @@ function Availble(props) {
             <ListFilter
                 value = { room }
             />
-            {
-                booking_detail && 
-                (
-                    <ModalBookingRoom/>
-                )
-            }
         </div>
     );
 }

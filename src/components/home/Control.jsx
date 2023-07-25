@@ -5,7 +5,7 @@ import { filterContext } from '../../context/home/filterReport';
 
 const Control = memo(() => {
     const [ filter, set_fitler ] = useState( 'week' )
-    const { set_donut, set_line } = useContext( filterContext )
+    const { set_donut, set_line, set_total_payment, set_count_payment } = useContext( filterContext )
     const get_report_donut = async() =>
     {
         const res = await Fetch.make().post(
@@ -40,11 +40,47 @@ const Control = memo(() => {
         set_line( res.data )
     }
 
+    const get_total_payment = async() =>
+    {
+        const res = await Fetch.make().post(
+            `${ import.meta.env.VITE_API_URL }/api/report/payment-total-statistics`,
+            {
+                dimension: filter
+            }
+        )
+
+        if( !res.success )
+        {
+            Toast.getToastError( res.message )
+            return
+        }
+        set_total_payment( res.data.totalPayment )
+    }
+
+    const get_count_payment = async() =>
+    {
+        const res = await Fetch.make().post(
+            `${ import.meta.env.VITE_API_URL }/api/report/get-total-bookings-dimension`,
+            {
+                dimension: filter
+            }
+        )
+
+        if( !res.success )
+        {
+            Toast.getToastError( res.message )
+            return
+        }
+        set_count_payment( res.data.totalBookings )
+    }
+
     useEffect(
         () =>
         {
             get_report_donut()
             get_report_line()
+            get_total_payment()
+            get_count_payment()
         },[ filter ]
     )
 

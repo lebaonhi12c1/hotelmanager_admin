@@ -8,15 +8,13 @@ import { format } from "date-fns";
 import LoadingItem from '../LoadingItem';
 
 const BookingRoom = memo(( { value } ) => {
-    const { booking_detail } = useContext( bookingContext )
+    const { booking_detail, filter } = useContext( bookingContext )
     const [ services, set_services ] = useState( null )
     const [ total, set_total ] = useState( 0 )
     const [ loading, set_loading ] = useState( false )
     const [ status, set_status ] = useState( 'confirmed' )
     const [ payment_method, set_payment_method ] = useState( 'Chuyển khoản' )
-    const [ start_date, set_start_date ] = useState( format( new Date(), 'yyyy-MM-dd') )
     const [selectedServices, setSelectedServices] = useState([]);
-    const [ end_date, set_end_date ] = useState( format(new Date().setDate((new Date().getDate() +1)), 'yyyy-MM-dd') )
     
     const get_services = async() =>
     {
@@ -40,8 +38,8 @@ const BookingRoom = memo(( { value } ) => {
             {
                 customer: value?.id,
                 room: booking_detail?.id,
-                checkInDate: start_date,
-                checkOutDate: end_date,
+                checkInDate: filter.startDate,
+                checkOutDate: filter.endDate,
                 status: status,
                 employee: JSON.parse( localStorage.getItem( 'user' )).id,
                 paymentAmount: total * 0.3,
@@ -88,12 +86,12 @@ const BookingRoom = memo(( { value } ) => {
         () =>
         {
             set_total(
-                Number(booking_detail?.price) * get_day_of_time( start_date, end_date ) + selectedServices?.reduce(
+                Number(booking_detail?.price) * get_day_of_time( filter.startDate, filter.endDate ) + selectedServices?.reduce(
                     ( total, item ) => total + Number( JSON.parse( item )?.amount ),
                     0
                 )
             )
-        },[ selectedServices, booking_detail, start_date, end_date ]
+        },[ selectedServices, booking_detail, filter ]
     )
     return (
         <div
@@ -165,37 +163,21 @@ const BookingRoom = memo(( { value } ) => {
                
                 <div className="flex items-center">
                     
-                    <div className="relative max-w-sm">
-                        <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                            <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                            </svg>
-                        </div>
-                        <input type="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date"
-                            value={
-                                start_date
-                            }
-                            onChange={
-                                e => set_start_date( e.target.value )
-                            }
-                        />
+                    <div
+                        className=' px-4 py-2 border rounded-lg bg-slate-100'
+                    >
+                        {
+                            filter.startDate
+                        }
                     </div>
 
                     <span className="mx-4 text-gray-500">đến</span>
-                    <div className="relative max-w-sm">
-                        <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                            <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                            </svg>
-                        </div>
-                        <input type="date" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date"
-                            value={
-                                end_date
-                            }
-                            onChange={
-                                e => set_end_date( e.target.value )
-                            }
-                        />
+                    <div
+                        className=' px-4 py-2 border rounded-lg bg-slate-100'
+                    >
+                        {
+                            filter.endDate
+                        }
                     </div>
                 </div>
                 <div>
@@ -227,7 +209,9 @@ const BookingRoom = memo(( { value } ) => {
                 </div>
                  
                 <div>
-                    <label htmlFor="years" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+                    <label htmlFor="years" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Trạng thái
+                    </label>
                     <select id="years" size="5" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         onChange={
                             e => set_status( e.target.value )
@@ -238,7 +222,9 @@ const BookingRoom = memo(( { value } ) => {
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="payment_method" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+                    <label htmlFor="payment_method" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Phương thức thanh toán
+                    </label>
                     <select id="payment_method" size="5" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         onChange={
                             e => set_payment_method( e.target.value )

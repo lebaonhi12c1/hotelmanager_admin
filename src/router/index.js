@@ -1,6 +1,7 @@
 import DefaultLayout from "../layout/DefaultLayout"
 import Availble from "../page/availbleRoom/AvailbleRoom"
 import Booking from "../page/booking/Booking"
+import BookingRoomPage from "../page/bookingroom/BookingRoomPage"
 import CheckInOut from "../page/check_in_out/CheckInOut"
 import Customer from "../page/customer/Customer"
 import Employee from "../page/employee/Employee"
@@ -84,6 +85,12 @@ const router = [
 
         path: '/check',
         element: CheckInOut,
+        layout: DefaultLayout,
+    },
+    {
+
+        path: '/bookingroom',
+        element: BookingRoomPage,
         layout: DefaultLayout,
     },
 ]

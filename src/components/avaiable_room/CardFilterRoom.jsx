@@ -1,9 +1,9 @@
 import React, { memo, useContext } from "react";
 import { get_format_price } from "../../helpers/globalfunction";
-import { bookingContext } from "../../context/booking/BookingContext";
+// import { bookingContext } from "../../context/booking/BookingContext";
 
 const CardFilterRoom = memo(( { value } ) => {
-    const { set_booking_detail } = useContext( bookingContext )
+    // const { set_booking_detail } = useContext( bookingContext )
     const get_style_status = (value) => {
         switch (value) {
             case "confirmed":
@@ -114,7 +114,7 @@ const CardFilterRoom = memo(( { value } ) => {
                 </div>
                 
             </div>
-            {
+            {/* {
                 value?.status === 'free' && 
                 (
                     <button type="button" className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
@@ -126,7 +126,7 @@ const CardFilterRoom = memo(( { value } ) => {
                     </button>
 
                 )
-            }
+            } */}
 
         </div>
     );
