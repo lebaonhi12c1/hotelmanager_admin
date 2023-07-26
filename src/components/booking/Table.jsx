@@ -7,13 +7,16 @@ import Dinalog from "./Dinalog";
 import Fetch from "../../helpers/fetch";
 import ModalDetail from "./ModalDetail";
 import { bookingContext } from "../../context/booking/BookingContext";
+import { bookingChangeContext } from "../../context/booking_change/BookingChangeContext";
+import { useNavigate } from "react-router-dom";
 
 const Table = memo(() => {
     const [ is_open, set_dinalog ] = useState( false )
     const [room_types, set_room_type] = useState(null);
     const [ booking_info_detail, set_booking_info_detail ] = useState( null )
-
+    const { set_change_info } = useContext( bookingChangeContext )
     const [ value, set_value ] = useState( null )
+    const router = useNavigate()
     const get_room_type = async () => {
         const res = await Booking.getAllBooking();
         if (!res.success) {
@@ -118,6 +121,19 @@ const Table = memo(() => {
         set_booking_info_detail( res.data )
         return
     }
+
+    const handle_booking_change = ( value, e) =>
+    {
+        e.stopPropagation()
+        
+        if( !value )
+        {
+            Toast.getToastError( 'Không lấy được dữ liệu đơn')
+            return 
+        }
+        set_change_info( value )
+        router( '/booking/change' )
+    }
     // {"id":3,"code":"SINGLE2","name":"Single Room2","description":"A cozy room for one person.","capacity":1,"area":20,"status":"published","employee":1,"priceBegin":"50"
     return (
         <div>
@@ -212,25 +228,46 @@ const Table = memo(() => {
                                             >
                                                 Hủy
                                             </button>
-                                            <button
-                                                type="button"
-                                                className={
-                                                    `text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 whitespace-nowrap ${ item.status !== 'spending' && 'cursor-not-allowed' }`
-
-                                                }
-                                                onClick={
-                                                    (e) => handle_set_dinalog( 
-                                                        {
-                                                            id: item.id,
-                                                            value: 'confirmed'
-                                                        },
-                                                        e
-                                                     )
-                                                }
-                                                disabled = { item.status !== 'spending' }
-                                            >
-                                                Xác nhận
-                                            </button>
+                                           {
+                                                item?.status === 'spending' &&
+                                                (
+                                                    <button
+                                                    type="button"
+                                                    className={
+                                                        `text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 whitespace-nowrap`
+    
+                                                    }
+                                                    onClick={
+                                                        (e) => handle_set_dinalog( 
+                                                            {
+                                                                id: item.id,
+                                                                value: 'confirmed'
+                                                            },
+                                                            e
+                                                         )
+                                                    }
+                                                >
+                                                    Xác nhận
+                                                </button>
+                                                )
+                                           }
+                                            {
+                                                item?.status !== 'cancelled' && item?.status !== 'spending' && item?.status !== 'checkedOut' &&
+                                                (
+                                                    <button
+                                                        type="button"
+                                                        className={
+                                                            `text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 whitespace-nowrap`
+                                                            
+                                                        }
+                                                        onClick={
+                                                            e => handle_booking_change( item, e )
+                                                        }
+                                                    >
+                                                        Đổi phòng
+                                                    </button>
+                                                )
+                                            }
                                         </div>
                                     </td>
                                 </tr>
