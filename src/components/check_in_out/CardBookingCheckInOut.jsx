@@ -55,7 +55,7 @@ const CardBookingCheckInOut = memo(( { value } ) => {
                         className=' font-medium italic text-slate-500'
                     >
                         {
-                            value?.room
+                            value?.Room?.code
                         }
                     </span>
                 </div>

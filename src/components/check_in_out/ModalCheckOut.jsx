@@ -15,13 +15,17 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
     const [ services, set_services ] = useState( null )
     const [selectedServices, setSelectedServices] = useState([]);
     const [ is_payment, set_is_payment ] = useState( null )
+    const [ loading, set_loading ] = useState( false )
+    const [ time, set_time ] = useState( 0 )
+    
     const handle_submit = async() =>
     {
+        set_loading( true )
         const res = await Fetch.make().post(
             `${import.meta.env.VITE_API_URL}/api/booking/check-out`,
             {
                 booking: check_out_info?.id,
-                employee: JSON.parse( localStorage.getItem( 'user') ).id,
+                employee: JSON.parse( localStorage.getItem( 'user') )?.id,
                 description,
             }
         )
@@ -29,11 +33,14 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
         if( !res.success )
         {
             Toast.getToastError( res.message )
+            set_loading( false )
             return
         }
         Toast.getToastSuccess( res.message )
         await handle_get_data()
         set_check_out_info( null )
+        set_loading( false )
+
     }
 
     const get_services = async () =>
@@ -76,8 +83,26 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
                 0
             ) +  selectedServices?.reduce(
                 (total, item) => total + Number( JSON.parse( item ).amount ), 0 
-            )
+            ) + get_time_free()
         )
+    }
+
+    const get_time_free = () =>
+    {
+        if( time != 0)
+        {
+            if( time < 11 )
+            {
+                return Math.ceil( check_out_info?.Room?.price / 2 )
+            }
+            if( time < 22 )
+            {
+                return  check_out_info?.Room?.price
+            }
+            return Math.ceil( check_out_info?.Room?.price * time/22 )
+        }
+
+        return 0
     }
 
     useEffect(
@@ -100,8 +125,6 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
                                 Check Out
                             </h3>
                         </div>
-                
-                        
                         <div
                             className='flex flex-col gap-2 p-4 max-h-[500px] overflow-y-auto'
                         >
@@ -150,7 +173,7 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
                                             className=' font-medium italic text-slate-500'
                                         >
                                             {
-                                                check_out_info?.room
+                                                check_out_info?.Room?.code
                                             }
                                         </span>
                                     </div>
@@ -271,6 +294,15 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
                                     )
                                 }
                             </div>
+                            <div className="mb-6">
+                                <label htmlFor="default-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giờ ở lại</label>
+                                <input type="number" id="default-input" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    min={0}
+                                    onChange={
+                                        e => set_time( e.target.value )
+                                    }
+                                />
+                            </div>
                             <div
                                 className='border-t-2 flex flex-col gap-2 py-2'
                             >
@@ -285,7 +317,7 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
                                             get_format_price(
                                                 selectedServices?.reduce(
                                                     (total, item) => total + Number( JSON.parse( item ).amount ), 0 
-                                                )
+                                                ) + get_time_free()
                                             )
                                         }
                                     </div>
@@ -339,8 +371,17 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
                                             handle_submit
                                         }
                                     >
-
-                                        Check Out
+                                        {
+                                            loading && (
+                                                <LoadingItem/>
+                                            )
+                                        }
+                                        {
+                                            !loading && (
+                                                'Check Out'
+                                            )
+                                        }
+                                       
                                     </button>
                                 )
                             }

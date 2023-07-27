@@ -14,13 +14,15 @@ const ModalCheckIn = memo(( { handle_get_data } ) => {
     const [ phone, set_phone ] = useState( null )
     const [ services, set_services ] = useState( null )
     const [selectedServices, setSelectedServices] = useState([]);
+    const [ loading, set_loading ] = useState( false )
     const handle_submit = async() =>
     {
+        set_loading( true )
         const res = await Fetch.make().post(
             `${import.meta.env.VITE_API_URL}/api/booking/check-in`,
             {
                 booking: check_in_info?.id,
-                employee: JSON.parse( localStorage.getItem( 'user' )).id,
+                employee: JSON.parse( localStorage.getItem( 'user' ))?.id,
                 description: personal + ", " + name + ", " + phone + ", " + description,
                 services: selectedServices?.map(
                     item => JSON.parse( item )
@@ -31,11 +33,13 @@ const ModalCheckIn = memo(( { handle_get_data } ) => {
         if( !res.success )
         {
             Toast.getToastError( res.message )
+            set_loading( false )
             return
         }
         Toast.getToastSuccess( res.message )
         await handle_get_data()
         set_check_in_info( null )
+        set_loading( false )
     }
 
     const get_services = async () =>
@@ -192,7 +196,19 @@ const ModalCheckIn = memo(( { handle_get_data } ) => {
                                 }
                             >
 
-                                Check In
+                                {
+                                    loading &&
+                                    (
+                                        <LoadingItem/>
+                                    )
+                                }
+                                
+                                {
+                                    !loading &&
+                                    (
+                                        'Check In'
+                                    )
+                                }
                             </button>
                             <button data-modal-hide="defaultModal" type="button" className="text-red-500 bg-white hover:bg-red-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-red-200 text-sm font-medium px-5 py-2.5 hover:text-red-900 focus:z-10 dark:bg-red-700 dark:text-red-300 dark:border-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-600"
                                 onClick={

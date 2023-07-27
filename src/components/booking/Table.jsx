@@ -6,11 +6,11 @@ import { format_date } from "../../helpers/globalfunction";
 import Dinalog from "./Dinalog";
 import Fetch from "../../helpers/fetch";
 import ModalDetail from "./ModalDetail";
-import { bookingContext } from "../../context/booking/BookingContext";
 import { bookingChangeContext } from "../../context/booking_change/BookingChangeContext";
 import { useNavigate } from "react-router-dom";
-
+import LoadingItem from '../LoadingItem'
 const Table = memo(() => {
+    const [ loading, set_loading ] = useState( false )
     const [ is_open, set_dinalog ] = useState( false )
     const [room_types, set_room_type] = useState(null);
     const [ booking_info_detail, set_booking_info_detail ] = useState( null )
@@ -34,6 +34,8 @@ const Table = memo(() => {
     const handle_submit = useCallback(
         async() =>
         {
+            set_dinalog( false )
+            set_loading( true )
             const res = await Fetch.make().put(
                 `${ import.meta.env.VITE_API_URL }/api/booking/${ value.id }/status`,
                 {
@@ -43,14 +45,14 @@ const Table = memo(() => {
 
              if( !res.success )
              {
-                Toast.getToastError( 'Cập nhật đơn đặt phòng thất bại' )
-                set_dinalog( false )
+                Toast.getToastError( res.message )
+                set_loading( false )
                 return
              }
 
              await get_room_type()
-             set_dinalog( false )
-             Toast.getToastSuccess( 'Cập nhật đơn đặt phòng thành công')
+             set_loading( false )
+             Toast.getToastSuccess( res.message )
         }
     )
 
@@ -122,16 +124,20 @@ const Table = memo(() => {
         return
     }
 
-    const handle_booking_change = ( value, e) =>
+    const handle_booking_change = async ( value, e) =>
     {
         e.stopPropagation()
         
-        if( !value )
+        const res = await Fetch.make().get(
+            `${import.meta.env.VITE_API_URL}/api/booking/${value.id}`
+        )
+        
+        if( !res.success )
         {
-            Toast.getToastError( 'Không lấy được dữ liệu đơn')
-            return 
+            Toast.getToastError( res.message )
+            return
         }
-        set_change_info( value )
+        set_change_info( res.data )
         router( '/booking/change' )
     }
     // {"id":3,"code":"SINGLE2","name":"Single Room2","description":"A cozy room for one person.","capacity":1,"area":20,"status":"published","employee":1,"priceBegin":"50"
@@ -210,24 +216,29 @@ const Table = memo(() => {
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className=" flex items-center gap-2">
-                                            <button
-                                                type="button"
-                                                className= {
-                                                    `text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ${ item.status === 'cancelled' && 'cursor-not-allowed' }`
-                                                }
-                                                onClick={
-                                                    (e) => handle_set_dinalog( 
-                                                        {
-                                                            id: item.id,
-                                                            value: 'cancelled'
-                                                        },
-                                                        e
-                                                     )
-                                                }
-                                                disabled = { item.status === 'cancelled' }
-                                            >
-                                                Hủy
-                                            </button>
+                                            {
+                                                item?.status !== 'cancelled' && 
+                                                (
+                                                    <button
+                                                        type="button"
+                                                        className= {
+                                                            `text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2`
+                                                        }
+                                                        onClick={
+                                                            (e) => handle_set_dinalog( 
+                                                                {
+                                                                    id: item.id,
+                                                                    value: 'cancelled'
+                                                                },
+                                                                e
+                                                            )
+                                                        }
+                                                    >
+                                                        Hủy
+                                                    </button>
+                                                )
+                                            }
+                                            
                                            {
                                                 item?.status === 'spending' &&
                                                 (
@@ -291,7 +302,14 @@ const Table = memo(() => {
                     />
                 )
             }
-            
+            {
+                loading && 
+                (
+                    <div className="fixed inset-0 flex items-center justify-center">
+                       <div className=" py-4 px-8 rounded-lg bg-black/50 shadow flex items-center justify-center"> <LoadingItem/></div>
+                    </div>
+                )
+            }
         </div>
     );
 });

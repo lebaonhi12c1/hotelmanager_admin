@@ -4,8 +4,9 @@ import Fetch from '../../helpers/fetch';
 import ListBookingRoomChange from '../../components/booking_change/ListBookingRoomChange';
 import Toast from '../../helpers/Toast';
 import { uid } from 'uid';
+import ModalBookingChange from '../../components/booking_change/ModalBookingChange';
 function BookingChange(props) {
-    const { change_info } = useContext( bookingChangeContext )
+    const { change_info, room_change } = useContext( bookingChangeContext )
     const [ rooms, set_rooms ] = useState( null )
     const get_rooms = async () => {
         const res = await Fetch.make().get(
@@ -53,6 +54,13 @@ function BookingChange(props) {
                             </div>
                         )
                     }
+                )
+            }
+
+            {
+                room_change &&
+                (
+                    <ModalBookingChange/>
                 )
             }
         </div>
