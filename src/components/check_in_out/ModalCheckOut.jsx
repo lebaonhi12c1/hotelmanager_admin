@@ -27,6 +27,9 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
                 booking: check_out_info?.id,
                 employee: JSON.parse( localStorage.getItem( 'user') )?.id,
                 description,
+                services: selectedServices?.map(
+                    item => JSON.parse( item )
+                )
             }
         )
         
