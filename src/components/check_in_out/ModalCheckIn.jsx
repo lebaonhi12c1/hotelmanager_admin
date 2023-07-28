@@ -38,7 +38,7 @@ const ModalCheckIn = memo(( { handle_get_data } ) => {
         }
         Toast.getToastSuccess( res.message )
         await handle_get_data()
-        set_check_in_info( null )
+        // set_check_in_info( null )
         set_loading( false )
     }
 

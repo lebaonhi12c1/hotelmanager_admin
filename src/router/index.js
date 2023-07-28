@@ -9,6 +9,7 @@ import Employee from "../page/employee/Employee"
 import Home from "../page/home/Home"
 import Payment from "../page/payment/Payment"
 import Room from "../page/room/Room"
+import CreateRoom from "../page/room/create/Create"
 import RoomType from "../page/room_type/RoomType"
 import Create from "../page/room_type/create/Create"
 import Update from "../page/room_type/update/Update"
@@ -98,6 +99,12 @@ const router = [
 
         path: '/booking/change',
         element: BookingChange,
+        layout: DefaultLayout,
+    },
+    {
+
+        path: '/rooms/create',
+        element: CreateRoom,
         layout: DefaultLayout,
     },
 ]

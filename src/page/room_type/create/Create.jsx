@@ -1,25 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
-import { getUpCloudinary } from '../../../cloudinary/cloudinary';
+import { uid } from 'uid';
+import Fetch from '../../../helpers/fetch';
+import Toast from '../../../helpers/Toast';
+import LoadingItem from '../../../components/LoadingItem';
 function Create(props) {
-
+    const [ images, set_image ] = useState( [] )
+    const [ loading, set_loading ] = useState( false )
     const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm();
     
-      const onSubmit = (data) => {
-        
-        console.log(data);
-        // Thực hiện xử lý dữ liệu ở đây, ví dụ lưu vào cơ sở dữ liệu hoặc gọi API.
-        console.log(
-            Object.keys(data.image).map((key) => (
-                getUpCloudinary(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`,data.image[key],'room_type')
-              ))
+      const onSubmit = async(data) => {
+        set_loading( true )
+        const res = await Fetch.make().post(
+            `${ import.meta.env.VITE_API_URL }/api/room-type`,
+            {
+                code: data?.code,
+                name: data?.name,
+                description: data?.description,
+                capacity: data?.capacity,
+                area: data?.area,
+                status: data?.status,
+                image: images,
+                employee: JSON.parse( localStorage.getItem( 'user' ) )?.id,
+                priceBegin: data?.priceBegin
+            }
         )
+        if( !res.success )
+        {
+            Toast.getToastError( res.message )
+            set_loading( false )
+            return
+        }
+        Toast.getToastSuccess( res.message )
+        set_loading( false )
+        // Thực hiện xử lý dữ liệu ở đây, ví dụ lưu vào cơ sở dữ liệu hoặc gọi API.
       };
+
+      const handle_add_image = () =>
+      {
+            set_image( 
+                [ ...images, { id: uid( 10 ), value: '' } ]
+            )
+      }
+
+      const handle_change = ( value, id ) =>
+      {
+            set_image(
+                images?.map(
+                    ( item, index ) => index === id ? { ...item, value: value } : item 
+                )
+            )
+      }
+      const handle_remove_image = id =>
+      {     
+            set_image(
+                images?.filter(
+                    ( item, index ) => index !== id
+                )
+            )
+      }
     return (
         <div>
            <section className="bg-white dark:bg-gray-900">
@@ -151,15 +195,67 @@ function Create(props) {
                         />
                         {errors['item-weight'] && <p>{errors['item-weight'].message}</p>}
                     </div>
-                    
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="multiple_files">Upload multiple files</label>
-                        <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple
-                            {...register('image', { required: 'Tên loại phòng là bắt buộc' })}
-                        />
-                    </div>
-
                     {/* Mô tả */}
+                    <div
+                        className=' col-span-2 flex flex-col gap-2'
+                    >
+                        <div
+                            className='block text-sm font-medium text-gray-900 dark:text-white'
+                        >
+                            Hình ảnh
+                        </div> 
+                        <div
+                            className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800 w-fit cursor-pointer"
+                            onClick={
+                                handle_add_image
+                            }
+                        >
+                            Thêm ảnh
+                        </div>
+                        {/* <input
+                            type="text"
+                            id="image"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Link"
+                            required
+                        /> */}
+
+                        <div
+                            className='flex flex-col gap-2'
+                        >
+                            {
+                                images?.map(
+                                    ( item, index ) =>
+                                    (
+                                        <div className="flex items-center gap-2"
+                                            key={ uid( 10 ) }
+                                        >
+                                            <input
+                                               
+                                                type="text"
+                                                id="image"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="Link"
+                                                required
+                                                value={ item?.value }
+                                                onChange={
+                                                    e => handle_change( e.target.value, index )
+                                                }
+                                            />
+                                            <div
+                                                className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-red-200 dark:focus:ring-red-900 hover:bg-red-800 w-fit  cursor-pointer"
+                                                onClick={
+                                                    () => handle_remove_image( index )
+                                                }
+                                            >
+                                                Xóa
+                                            </div>
+                                        </div>
+                                    )
+                                )
+                            }
+                        </div>
+                    </div>
                     <div className="sm:col-span-2">
                         <label
                         htmlFor="description"
@@ -176,12 +272,21 @@ function Create(props) {
                         />
                         {/* Không cần xác thực dữ liệu cho trường mô tả */}
                     </div>
-
+                    
                     <button
                         type="submit"
                         className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800 w-fit"
                     >
-                        Thêm loại Phòng
+                        {
+                            loading && 
+                            (
+                                <LoadingItem/>
+                            )
+
+                        }
+                        {
+                            !loading && 'Thêm loại phòng'
+                        }
                     </button>
                     </form>
                 </div>
