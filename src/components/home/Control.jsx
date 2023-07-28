@@ -1,7 +1,7 @@
 import React, { memo, useContext, useEffect, useState } from 'react';
 import Fetch from '../../helpers/fetch';
 import Toast from '../../helpers/Toast';
-import { filterContext } from '../../context/home/filterReport';
+import { filterContext } from '../../context/home/FilterReport';
 
 const Control = memo(() => {
     const [ filter, set_fitler ] = useState( 'week' )
