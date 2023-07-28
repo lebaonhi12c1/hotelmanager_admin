@@ -2,7 +2,6 @@
 import { format, parse } from 'date-fns';
 
 export function formatDateToISO(inputDate) {
-  console.log( inputDate)
   // Chuyển đổi ngày đầu vào sang đối tượng Date
   const dateObject = parse(inputDate, 'dd/MM/yyyy', new Date());
 

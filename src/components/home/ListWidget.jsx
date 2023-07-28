@@ -23,7 +23,6 @@ const ListWidget = memo(() => {
             get_report()
         },[]
     )
-    console.log( data )
     return (
         <div
             className='grid grid-cols-4 gap-4'

@@ -39,7 +39,9 @@ const Table = memo(() => {
             const res = await Fetch.make().put(
                 `${ import.meta.env.VITE_API_URL }/api/booking/${ value.id }/status`,
                 {
-                    status: value.value
+                    status: value.value,
+                    employee: JSON.parse( localStorage.getItem( 'user' ))?.id,
+                    text: 'text'
                 }
              )
 
