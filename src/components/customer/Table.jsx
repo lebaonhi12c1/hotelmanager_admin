@@ -1,20 +1,23 @@
 import React, { memo, useEffect, useState } from 'react';
 import Toast from '../../helpers/Toast';
 import { uid } from 'uid';
-import EmployeeService from '../../services/employee.service';
+import Fetch from '../../helpers/fetch';
 
 const Table = memo(( { value } ) => {
     
     const [ service, set_service ] = useState( null )
     const get_service = async() =>
     {
-        const res = await EmployeeService.getAllEmployee()
+        const res = await Fetch.make().get(
+            `${ import.meta.env.VITE_API_URL }/api/customer`
+        )
+        
         if( !res.success )
         {
             Toast.getToastError( res.message )
             return
         }
-        
+
         set_service(res.data )
     }
 
@@ -72,16 +75,7 @@ const Table = memo(( { value } ) => {
                                 ID
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Mã nhân viên
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Tên nhân viên
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Lương
-                            </th>
-                             <th scope="col" className="px-6 py-3">
-                                Phòng ban
+                                Tên khách hàng
                             </th>
                              <th scope="col" className="px-6 py-3">
                                 email
@@ -90,7 +84,7 @@ const Table = memo(( { value } ) => {
                                 số điện thoại
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Action
+                               tài khoản
                             </th>
                         </tr>
                     </thead>
@@ -110,24 +104,7 @@ const Table = memo(( { value } ) => {
                                             </th>
                                             <td className="px-6 py-4">
                                                 {
-                                                    item.code
-                                                }
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                {
                                                     item.name
-                                                }
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                {
-                                                    Number(item?.salary).toLocaleString('vn') + "đ"
-                                                }
-                                            </td>
-                                            <td 
-                                                 className="px-6 py-4"
-                                            >
-                                                {
-                                                    item?.department
                                                 }
                                             </td>
                                             <td 
@@ -142,6 +119,13 @@ const Table = memo(( { value } ) => {
                                             >
                                                 {
                                                     item?.phone
+                                                }
+                                            </td>
+                                            <td 
+                                                 className="px-6 py-4 whitespace-nowrap"
+                                            >
+                                                {
+                                                    item?.username
                                                 }
                                             </td>
                                             <td className="px-6 py-4 flex items-center gap-2">

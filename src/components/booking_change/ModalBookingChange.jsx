@@ -21,7 +21,8 @@ const ModalBookingChange = memo(() => {
             `${ import.meta.env.VITE_API_URL }/api/booking/change-room`,
             {
                 booking: change_info?.id,
-                room: room_change?.id
+                room: room_change?.id,
+                total: get_price()
             }
         )
         if( !res.success )
@@ -50,12 +51,6 @@ const ModalBookingChange = memo(() => {
                         <div
                             className='flex flex-col gap-4 p-4 max-h-[500px] overflow-auto'
                         >
-                            {
-                                JSON.stringify( room_change)
-                            }
-                            {
-                                JSON.stringify( change_info )
-                            }
                             <div
                                 className='rounded-lg p-4 bg-slate-100'
                             >

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Fetch from "../../helpers/fetch";
 import Toast from "../../helpers/Toast";
 import { convertToLowerCase } from "../../helpers/globalfunction";
+import { uid } from "uid";
+import LoadingItem from "../LoadingItem";
 
 function MyForm( { handle_submit } ) {
     const {
@@ -12,13 +14,13 @@ function MyForm( { handle_submit } ) {
         getValues,
     } = useForm();
 
+    const [ loading, set_loading ] = useState( false )
     const onSubmit = async(data) => {
-
-        console.log(data);
+        set_loading( true )
         const res = await Fetch.make().post(
             `${ import.meta.env.VITE_API_URL }/api/customer/register`,
             {
-                username: convertToLowerCase( data.name ),
+                username: convertToLowerCase( data.name ) + uid( 5 ),
                 password: 'password123',
                 name: data.name,
                 email: data.email,
@@ -31,10 +33,13 @@ function MyForm( { handle_submit } ) {
         if( !res.success )
         {
             Toast.getToastError( res.message )
+            set_loading( false )
+
             return
         }
         handle_submit( res.data )
         Toast.getToastSuccess( res.message )
+        set_loading( false )
     };
 
     return (
@@ -164,7 +169,18 @@ function MyForm( { handle_submit } ) {
                 type="submit"
                 className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-fit"
             >
-                Đăng ký
+                {
+                    loading && 
+                    (
+                        <LoadingItem/>
+                    )
+                }
+                {
+                    !loading &&
+                    (
+                        'Đăng ký'
+                    )
+                }
             </button>
         </form>
     );

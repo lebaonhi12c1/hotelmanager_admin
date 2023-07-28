@@ -17,7 +17,7 @@ const ContainerInfoUser = memo(( { value } ) => {
                         </div>
                         <div>
                             {
-                                value.name || 'Chưa có'
+                                value?.name || 'Chưa có'
                             }
                         </div>
                     </div>
@@ -31,7 +31,7 @@ const ContainerInfoUser = memo(( { value } ) => {
                         </div>
                         <div>
                             {
-                                value.email || 'Chưa có'
+                                value?.email || 'Chưa có'
                             }
                         </div>
                     </div>
@@ -45,7 +45,7 @@ const ContainerInfoUser = memo(( { value } ) => {
                         </div>
                         <div>
                             {
-                                value.phone || 'Chưa có'
+                                value?.phone || 'Chưa có'
                             }
                         </div>
                     </div>
@@ -59,7 +59,7 @@ const ContainerInfoUser = memo(( { value } ) => {
                         </div>
                         <div>
                             {
-                                value.gender || 'Chưa có'
+                                value?.gender || 'Chưa có'
                             }
                         </div>
                     </div>
@@ -73,7 +73,7 @@ const ContainerInfoUser = memo(( { value } ) => {
                         </div>
                         <div>
                             {
-                                value.address || 'Chưa có'
+                                value?.address || 'Chưa có'
                             }
                         </div>
                     </div>

@@ -38,7 +38,6 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
         }
         Toast.getToastSuccess( res.message )
         await handle_get_data()
-        set_check_out_info( null )
         set_loading( false )
 
     }
@@ -97,7 +96,7 @@ const ModalCheckOut = memo(( { handle_get_data } ) => {
             }
             if( time < 22 )
             {
-                return  check_out_info?.Room?.price
+                return  Number( check_out_info?.Room?.price )
             }
             return Math.ceil( check_out_info?.Room?.price * time/22 )
         }
