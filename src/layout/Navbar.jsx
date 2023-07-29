@@ -1,9 +1,19 @@
 import React, { memo, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setIsLogin } from '../store/auth/auth.reducer';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = memo(() => {
 
     const [ option, set_option ] = useState( false )
-
+    const ditpatch = useDispatch()
+    const router = useNavigate()
+    const handle_logout = () =>
+    {
+      localStorage.clear()
+      ditpatch(setIsLogin(false))
+      router( '/login' )
+    }
     return (
         <div
             className='p-4 flex justify-between border-b-2'
@@ -90,6 +100,8 @@ const Navbar = memo(() => {
                             <div className="absolute left-0 w-full p-2 mt-2 bg-white rounded-lg shadow top-full">
                                 <div
                                 className="p-3 rounded cursor-pointer hover:text-red-500 hover:bg-red-50"
+                                
+                                  onClick={ handle_logout }
                                 >
                                     Đăng xuất
                                 </div>

@@ -72,7 +72,6 @@ function CreateRoom(props) {
     
     const onSubmit = async(data) => {
         // Xử lý dữ liệu khi submit form
-        console.log(data);
         set_loading( true )
         const res = await Fetch.make().post(
             `${ import.meta.env.VITE_API_URL }/api/room`,
